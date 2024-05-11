@@ -127,10 +127,22 @@ MonoBehaviour:
   naturalDutyDrainPerSecond: 2
   generationTestScript: {fileID: 0}
   pathfindingTestScript: {fileID: 0}
-  modelObject: {fileID: 1871201504786383852, guid: 1e964d13a0c39044d85c40fa7722a5c0, type: 3}
+  modelObject: {fileID: 8687403050558752565, guid: b1e0ee39d08c5c743ba5caaa56e0d8d9, type: 3}
   duty: 0
   sanity: 0
   health: 0
+  citizen:
+    CitizenName: 
+    FaithAttractionTrait: 0
+    PlayerGodAttraction: 0
+    CitizenFaction: 0
+    housePosition: {x: 0, y: 0}
+    Health: 0
+    Sanity: 0
+    HealthThreshold: 0
+    Sanityhreshold: 0
+    Happiness: 0
+    FactionDuty: 0
 --- !u!95 &1097325825082147226
 Animator:
   serializedVersion: 7

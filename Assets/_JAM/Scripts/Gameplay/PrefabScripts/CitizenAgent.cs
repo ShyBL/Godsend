@@ -45,12 +45,14 @@ namespace Base.Gameplay
 
         private Building destination = null;
         private Building occupyingBuilding = null;
+        private Animator anims;
 
         private Vector2[] currentPath;
 
         void Start()
         {
             citizen.CitizenNeeds.CalculateNeeds(citizen.Sanity, citizen.Happiness, citizen.FactionDuty);
+            anims = GetComponent<Animator>();
             checkTimer = Random.Range(0, 1f);
             buildingChecks = Random.Range(0, buildingChecksPerMove + 1);
             checkBuildingTime += Random.Range(0, 0.15f);
@@ -58,15 +60,26 @@ namespace Base.Gameplay
             gridZOffset = Random.Range(0, 0.25f);
         }
 
+        private void Update()
+        {
+            if(isMoving)
+            {
+                anims.SetBool("Walking", true);
+            }
+            else
+            {
+                anims.SetBool("Walking", false);
+            }
+        }
         private void FixedUpdate()
         {
+
             if (destination == null)
             {
                 destination = GetNextDestination();
                 occupyingBuilding = generationTestScript.buildingGrid[citizen.housePosition];
                 modelObject.SetActive(false);
             }
-
             citizen.CitizenNeeds.CalculateNeeds(citizen.Sanity, citizen.Happiness, citizen.FactionDuty);
             sanity = citizen.Sanity;
             health = citizen.Happiness;
@@ -96,6 +109,7 @@ namespace Base.Gameplay
 
                 if (!isMoving)
                 {
+                    
                     buildingChecks++;
                     if (buildingChecks > buildingChecksPerMove)
                     {
@@ -116,16 +130,17 @@ namespace Base.Gameplay
         {
             isMoving = true;
             modelObject.SetActive(true);
-
             for (int i = currentPath.Length - 1; i >= 0; i--)
             {
-                transform.DOMove(new Vector3(currentPath[i].x, 0, currentPath[i].y), moveTime);
+                transform.DOMove(new Vector3(currentPath[i].x, 0, currentPath[i].y), moveTime*2);
+                transform.DOLookAt(new Vector3(currentPath[i].x, 0, currentPath[i].y),moveTime/15);
                 yield return new WaitForSeconds(moveTime);
             }
 
             transform.position = new Vector3(destination.gridPositions[0].x + gridXOffset, 0, destination.gridPositions[0].y + gridZOffset);
             occupyingBuilding = destination;
 
+            
             modelObject.SetActive(false);
             isMoving = false;
         }
