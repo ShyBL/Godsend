@@ -100,7 +100,7 @@ MonoBehaviour:
   naturalDutyDrainPerSecond: 2
   generationTestScript: {fileID: 0}
   pathfindingTestScript: {fileID: 0}
-  modelObject: {fileID: 1871201504786383852, guid: 1e964d13a0c39044d85c40fa7722a5c0, type: 3}
+  modelObject: {fileID: 8994617035238548494}
   duty: 0
   sanity: 0
   health: 0
@@ -204,5 +204,10 @@ PrefabInstance:
 --- !u!4 &8617809570349350580 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d7968da7810e7434885bd16844df3fa4, type: 3}
+  m_PrefabInstance: {fileID: 8075558143194503519}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8994617035238548494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d7968da7810e7434885bd16844df3fa4, type: 3}
   m_PrefabInstance: {fileID: 8075558143194503519}
   m_PrefabAsset: {fileID: 0}

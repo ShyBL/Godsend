@@ -62,14 +62,14 @@ namespace Base.Gameplay
 
         private void Update()
         {
-            if(isMoving)
-            {
-                anims.SetBool("Walking", true);
-            }
-            else
-            {
-                anims.SetBool("Walking", false);
-            }
+            // if(isMoving)
+            // {
+            //     anims.SetBool("Walking", true);
+            // }
+            // else
+            // {
+            //     anims.SetBool("Walking", false);
+            // }
         }
         private void FixedUpdate()
         {
@@ -79,6 +79,7 @@ namespace Base.Gameplay
                 destination = GetNextDestination();
                 occupyingBuilding = generationTestScript.buildingGrid[citizen.housePosition];
                 modelObject.SetActive(false);
+                anims.SetBool("Walking", false);
             }
             citizen.CitizenNeeds.CalculateNeeds(citizen.Sanity, citizen.Happiness, citizen.FactionDuty);
             sanity = citizen.Sanity;
@@ -130,17 +131,16 @@ namespace Base.Gameplay
         {
             isMoving = true;
             modelObject.SetActive(true);
+            anims.SetBool("Walking", true);
             for (int i = currentPath.Length - 1; i >= 0; i--)
             {
                 transform.DOMove(new Vector3(currentPath[i].x, 0, currentPath[i].y), moveTime*2);
                 transform.DOLookAt(new Vector3(currentPath[i].x, 0, currentPath[i].y),moveTime/15);
                 yield return new WaitForSeconds(moveTime);
             }
-
+            
             transform.position = new Vector3(destination.gridPositions[0].x + gridXOffset, 0, destination.gridPositions[0].y + gridZOffset);
             occupyingBuilding = destination;
-
-            
             modelObject.SetActive(false);
             isMoving = false;
         }
